@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebSite_with_calculations
+namespace WebSite
 {
     public class Program
     {
