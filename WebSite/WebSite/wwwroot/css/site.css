@@ -69,3 +69,15 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+
+
+#divUploadFiles {
+/*    width: 400px;
+    height: 400px;*/
+    margin-left:50px;
+    margin-right:50px;
+    line-height: 400px;
+    border: 2px dashed #000;
+    border-radius: 15px;
+    text-align: center;
+}

@@ -1,9 +1,14 @@
 ﻿@{
-    ViewData["Title"] = "Privacy Policy";
+    ViewData["Title"] = "Others";
 }
 @section Footer {
     Все права защищены. Syte Corp. 2021.
 }
 <h1>@ViewData["Title"]</h1>
+@{
+    for (int i = 0; i < 30; i++)
+    {
+        <p>Others. @i</p>
+    }
+}
 
-<p>Use this page to detail your site's privacy policy.</p>

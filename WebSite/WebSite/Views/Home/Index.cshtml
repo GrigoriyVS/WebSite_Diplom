@@ -1,8 +1,86 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+@section Footer {
+    Все права защищены. Syte Corp. 2012.
+}
 
+<script src="~/lib/jquery/dist/jquery.js"></script>
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Вычисления и поле для вычислений.</h1>
+    <p>.</p>
 </div>
+<form enctype="multipart/form-data" method="post">
+    <div id="divUploadFiles">
+        Drop files here...
+    </div>
+    <br />
+    <img src="#" alt="Alternate Text" style="display:none;" />
+</form>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        InitDragAndDrop();
+        DragDropOperation();
+    });
+
+    function InitDragAndDrop() {
+        $("#divUploadFiles").on("dragenter", function (evt) {
+            evt.preventDefault();
+            evt.stopPropagation();
+        });
+
+        $("#divUploadFiles").on("dragover", function (evt) {
+            evt.preventDefault();
+            evt.stopPropagation();
+        });
+
+        $("#divUploadFiles").on("drop", function (evt) {
+            evt.preventDefault();
+            evt.stopPropagation();
+        });
+    }
+    function DragDropOperation() {
+        $("#divUploadFiles").on("drop", function (evt) {
+            evt.preventDefault();
+            evt.stopPropagation();
+
+            var files = evt.originalEvent.dataTransfer.files;
+            var fileNames = "";
+            if (files.length > 0) {
+                fileNames += "Upd file <br />";
+
+                for (var i = 0; i < files.length; i++) {
+                    fileNames += files[i].name + "<br />";
+                }
+
+                $("#divUploadFiles").html(fileNames);
+
+                var data = new FormData();
+                for (var i = 0; i < files.length; i++) {
+                    data.append(files[i].name, files[i]);
+                }
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Home/UploadFiles",
+                    contentType: false,
+                    processData: false,
+                    data: data,
+                    success: function (message) {
+                        $("#divUploadFiles").html(message);
+                    },
+                    error: function () {
+                        $("#divUploadFiles").html("Error #Сам виноват!!!");
+                    },
+                    beforeSend: function () {
+                        $("#divUploadFiles").show();
+                    },
+                    complete: function () {
+                        $("#divUploadFiles").hide();
+                    },
+                });
+            }
+        });
+    }
+</script>
