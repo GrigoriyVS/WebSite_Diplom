@@ -53,14 +53,23 @@ namespace WebSite.Controllers
 
             foreach (var file in files)
             {
-                string fileName = _oHostingEnvironment.WebRootPath + $@"\Files\{file.FileName}";
-                size += file.Length;
+                string fileName = "";
+                fileName = _oHostingEnvironment.WebRootPath + $@"\Files\{file.FileName}";
 
-                using (FileStream fs = System.IO.File.Create(fileName)) 
+                size += file.Length;
+                try
                 {
-                    file.CopyTo(fs);
-                    fs.Flush();
+                    using (FileStream fs = System.IO.File.Create(fileName))
+                    {
+                        file.CopyTo(fs);
+                        fs.Flush();
+                    }
                 }
+                catch (Exception)
+                {
+                    break;
+                }
+
             }  
 
             string message = $"{files.Count} files and {size} bytes upload.";

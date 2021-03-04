@@ -15,7 +15,7 @@
         Drop files here...
     </div>
     <br />
-    <img src="#" alt="Alternate Text" style="display:none;" />
+    <img src="#" id="imgUpload" alt="Alternate Text" style="display:none;" />
 </form>
 
 <script type="text/javascript">
@@ -74,10 +74,10 @@
                         $("#divUploadFiles").html("Error #Сам виноват!!!");
                     },
                     beforeSend: function () {
-                        $("#divUploadFiles").show();
+                        $("#imgUpload").show();
                     },
                     complete: function () {
-                        $("#divUploadFiles").hide();
+                        $("#imgUpload").hide();
                     },
                 });
             }
